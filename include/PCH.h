@@ -64,7 +64,6 @@ namespace stl
 }
 
 namespace logger = SKSE::log;
-namespace WinAPI = SKSE::WinAPI;
 
 namespace util
 {
@@ -107,9 +106,6 @@ void InitializeLog()
 
 extern "C" DLLEXPORT  bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
 {
-#ifndef NDEBUG
-	while (!WinAPI::IsDebuggerPresent()) {};
-#endif
 	InitializeLog();
 	logger::info("Loaded plugin");
 	SKSE::Init(a_skse);

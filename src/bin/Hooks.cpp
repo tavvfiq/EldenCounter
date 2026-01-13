@@ -9,9 +9,8 @@ void Hook_MeleeHit::processHit(RE::Actor* victim, RE::HitData& hitData) {
 		_ProcessHit(victim, hitData);
 		return;
 	}
-	if (victim->IsPlayerRef() //player got hit
-		&& hitData.flags.any(HITFLAG::kBlocked)) { //player blocks hit
-		guardCounter::GetSingleton()->registerBlock();
+	if (hitData.flags.any(HITFLAG::kBlocked)) { //actor blocks hit
+		guardCounter::GetSingleton()->registerBlock(victim);
 	}
 	_ProcessHit(victim, hitData);
 }

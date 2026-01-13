@@ -1,4 +1,7 @@
 #pragma once
+#include "RE/Skyrim.h"
+#include "ThreadSafeMap.h"
+
 class guardCounter
 {
 public:
@@ -12,7 +15,7 @@ public:
 	void update();
 
 	/*Register a block, reset timer.*/
-	void registerBlock();
+	void registerBlock(RE::Actor* actor);
 
 	/*Read settings from simpleIni.*/
 	void readSettings();
@@ -22,7 +25,9 @@ public:
 private:
 	//timer for guard counter.
 	float gc_Time = 1;
-	float gc_Timer; 
+	
+	// Map to track timers for each actor
+	ThreadSafeMap<RE::FormID, float> gc_Timers;
 
 	/*Only when having this spell would trigger guard counter.*/
 	RE::SpellItem* gc_triggerSpell;
